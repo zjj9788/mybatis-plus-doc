@@ -7,7 +7,7 @@
     <meta name="description" content="为简化开发而生">
     <link rel="icon" href="/favicon.ico">
     
-    <link rel="preload" href="/assets/css/0.styles.cc2a2ebf.css" as="style"><link rel="preload" href="/assets/js/app.677802a9.js" as="script"><link rel="preload" href="/assets/js/9.bf23a1db.js" as="script"><link rel="prefetch" href="/assets/js/11.45456bf2.js"><link rel="prefetch" href="/assets/js/2.cda51ec0.js"><link rel="prefetch" href="/assets/js/3.24cc7f54.js"><link rel="prefetch" href="/assets/js/4.5a026988.js"><link rel="prefetch" href="/assets/js/5.b0982da0.js"><link rel="prefetch" href="/assets/js/6.e736ef50.js"><link rel="prefetch" href="/assets/js/7.e9525a8b.js"><link rel="prefetch" href="/assets/js/8.da39703d.js"><link rel="prefetch" href="/assets/js/10.845a003a.js"><link rel="prefetch" href="/assets/js/12.6c5064c4.js"><link rel="prefetch" href="/assets/js/13.fd47f61b.js"><link rel="prefetch" href="/assets/js/14.9fb377be.js"><link rel="prefetch" href="/assets/js/15.0e639209.js"><link rel="prefetch" href="/assets/js/16.53e99116.js"><link rel="prefetch" href="/assets/js/17.dac0813d.js"><link rel="prefetch" href="/assets/js/18.54a019da.js"><link rel="prefetch" href="/assets/js/19.f9c2e9ac.js"><link rel="prefetch" href="/assets/js/20.add29503.js"><link rel="prefetch" href="/assets/js/21.56ba2fd5.js"><link rel="prefetch" href="/assets/js/22.7549f29d.js"><link rel="prefetch" href="/assets/js/23.45a7d573.js"><link rel="prefetch" href="/assets/js/24.ef85c965.js">
+    <link rel="preload" href="/assets/css/0.styles.cc2a2ebf.css" as="style"><link rel="preload" href="/assets/js/app.f5891cd5.js" as="script"><link rel="preload" href="/assets/js/9.5c5b0803.js" as="script"><link rel="prefetch" href="/assets/js/11.45456bf2.js"><link rel="prefetch" href="/assets/js/2.cda51ec0.js"><link rel="prefetch" href="/assets/js/3.24cc7f54.js"><link rel="prefetch" href="/assets/js/4.5a026988.js"><link rel="prefetch" href="/assets/js/5.b0982da0.js"><link rel="prefetch" href="/assets/js/6.e736ef50.js"><link rel="prefetch" href="/assets/js/7.e9525a8b.js"><link rel="prefetch" href="/assets/js/8.da39703d.js"><link rel="prefetch" href="/assets/js/10.845a003a.js"><link rel="prefetch" href="/assets/js/12.6c5064c4.js"><link rel="prefetch" href="/assets/js/13.fd47f61b.js"><link rel="prefetch" href="/assets/js/14.9fb377be.js"><link rel="prefetch" href="/assets/js/15.0e639209.js"><link rel="prefetch" href="/assets/js/16.53e99116.js"><link rel="prefetch" href="/assets/js/17.dac0813d.js"><link rel="prefetch" href="/assets/js/18.54a019da.js"><link rel="prefetch" href="/assets/js/19.f9c2e9ac.js"><link rel="prefetch" href="/assets/js/20.add29503.js"><link rel="prefetch" href="/assets/js/21.56ba2fd5.js"><link rel="prefetch" href="/assets/js/22.7549f29d.js"><link rel="prefetch" href="/assets/js/23.45a7d573.js"><link rel="prefetch" href="/assets/js/24.ef85c965.js">
     <link rel="stylesheet" href="/assets/css/0.styles.cc2a2ebf.css">
   </head>
   <body>
@@ -42,14 +42,14 @@
     # 支持统配符 * 或者 ; 分割
     typeEnumsPackage: com.baomidou.springboot.entity.enums
   ....
-</code></pre></div><h1 id="_3-json序列化处理"><a href="#_3-json序列化处理" aria-hidden="true" class="header-anchor">#</a> 3.JSON序列化处理</h1> <h2 id="一、jackson"><a href="#一、jackson" aria-hidden="true" class="header-anchor">#</a> 一、Jackson</h2> <pre><code>1.在需要响应描述字段的get方法上添加@JsonValue注解即可
+</code></pre></div><h1 id="_3、json序列化处理"><a href="#_3、json序列化处理" aria-hidden="true" class="header-anchor">#</a> 3、JSON序列化处理</h1> <h2 id="一、jackson"><a href="#一、jackson" aria-hidden="true" class="header-anchor">#</a> 一、Jackson</h2> <pre><code>1.在需要响应描述字段的get方法上添加@JsonValue注解即可
 </code></pre> <h2 id="二、fastjson"><a href="#二、fastjson" aria-hidden="true" class="header-anchor">#</a> 二、Fastjson</h2> <p>1.全局处理方式</p> <div class="language- extra-class"><pre class="language-text"><code>		FastJsonConfig config = new FastJsonConfig();
 		//设置WriteEnumUsingToString
 		config.setSerializerFeatures(SerializerFeature.WriteEnumUsingToString);
 		converter.setFastJsonConfig(config);
 </code></pre></div><p>2.局部处理方式</p> <div class="language- extra-class"><pre class="language-text"><code>		@JSONField(serialzeFeatures= SerializerFeature.WriteEnumUsingToString)
 		private UserStatus status;
-</code></pre></div><p>以上两种方式任选其一,然后在枚举中复写toString方法即可.</p></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/baomidou/mybatis-plus-doc/edit/master/guide/enum.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2018-9-14 21:11:12</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div><p>以上两种方式任选其一,然后在枚举中复写toString方法即可.</p></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/baomidou/mybatis-plus-doc/edit/master/guide/enum.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2018-9-14 21:11:34</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
         ←
         <a href="/guide/logic-delete.html" class="prev">
           逻辑删除
@@ -58,6 +58,6 @@
         </a>
         →
       </span></p></div> </div> <!----></div></div>
-    <script src="/assets/js/9.bf23a1db.js" defer></script><script src="/assets/js/app.677802a9.js" defer></script>
+    <script src="/assets/js/9.5c5b0803.js" defer></script><script src="/assets/js/app.f5891cd5.js" defer></script>
   </body>
 </html>
