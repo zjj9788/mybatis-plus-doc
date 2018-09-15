@@ -7,7 +7,7 @@
     <meta name="description" content="为简化开发而生">
     <link rel="icon" href="/favicon.ico">
     
-    <link rel="preload" href="/assets/css/0.styles.cc2a2ebf.css" as="style"><link rel="preload" href="/assets/js/app.d742ad99.js" as="script"><link rel="preload" href="/assets/js/18.7810a342.js" as="script"><link rel="prefetch" href="/assets/js/11.3305727f.js"><link rel="prefetch" href="/assets/js/2.cda51ec0.js"><link rel="prefetch" href="/assets/js/3.24cc7f54.js"><link rel="prefetch" href="/assets/js/4.5a026988.js"><link rel="prefetch" href="/assets/js/5.b0982da0.js"><link rel="prefetch" href="/assets/js/6.e736ef50.js"><link rel="prefetch" href="/assets/js/7.4cb847b4.js"><link rel="prefetch" href="/assets/js/8.da39703d.js"><link rel="prefetch" href="/assets/js/9.5c5b0803.js"><link rel="prefetch" href="/assets/js/10.845a003a.js"><link rel="prefetch" href="/assets/js/12.6c5064c4.js"><link rel="prefetch" href="/assets/js/13.fd47f61b.js"><link rel="prefetch" href="/assets/js/14.9fb377be.js"><link rel="prefetch" href="/assets/js/15.4e0e04ad.js"><link rel="prefetch" href="/assets/js/16.53e99116.js"><link rel="prefetch" href="/assets/js/17.dac0813d.js"><link rel="prefetch" href="/assets/js/19.f9c2e9ac.js"><link rel="prefetch" href="/assets/js/20.add29503.js"><link rel="prefetch" href="/assets/js/21.56ba2fd5.js"><link rel="prefetch" href="/assets/js/22.7549f29d.js"><link rel="prefetch" href="/assets/js/23.b4fb1eb8.js"><link rel="prefetch" href="/assets/js/24.eb84d955.js">
+    <link rel="preload" href="/assets/css/0.styles.cc2a2ebf.css" as="style"><link rel="preload" href="/assets/js/app.aa333948.js" as="script"><link rel="preload" href="/assets/js/18.24eeaeb4.js" as="script"><link rel="prefetch" href="/assets/js/11.3305727f.js"><link rel="prefetch" href="/assets/js/2.cda51ec0.js"><link rel="prefetch" href="/assets/js/3.24cc7f54.js"><link rel="prefetch" href="/assets/js/4.5a026988.js"><link rel="prefetch" href="/assets/js/5.b0982da0.js"><link rel="prefetch" href="/assets/js/6.e736ef50.js"><link rel="prefetch" href="/assets/js/7.4cb847b4.js"><link rel="prefetch" href="/assets/js/8.da39703d.js"><link rel="prefetch" href="/assets/js/9.5c5b0803.js"><link rel="prefetch" href="/assets/js/10.845a003a.js"><link rel="prefetch" href="/assets/js/12.6c5064c4.js"><link rel="prefetch" href="/assets/js/13.fd47f61b.js"><link rel="prefetch" href="/assets/js/14.9fb377be.js"><link rel="prefetch" href="/assets/js/15.4e0e04ad.js"><link rel="prefetch" href="/assets/js/16.53e99116.js"><link rel="prefetch" href="/assets/js/17.dac0813d.js"><link rel="prefetch" href="/assets/js/19.f9c2e9ac.js"><link rel="prefetch" href="/assets/js/20.add29503.js"><link rel="prefetch" href="/assets/js/21.56ba2fd5.js"><link rel="prefetch" href="/assets/js/22.7549f29d.js"><link rel="prefetch" href="/assets/js/23.b4fb1eb8.js"><link rel="prefetch" href="/assets/js/24.eb84d955.js">
     <link rel="stylesheet" href="/assets/css/0.styles.cc2a2ebf.css">
   </head>
   <body>
@@ -57,15 +57,14 @@
     <span class="token comment">/**
      * &lt;p&gt;
      * 查询 : 根据state状态查询用户列表，分页显示
+     * 注意!!: 如果入参是有多个,需要加注解指定参数名才能在xml中取值
      * &lt;/p&gt;
      *
-     * @param page
-     *            翻页对象，可以作为 xml 参数直接使用，传递参数 Page 即自动分页【 必须存但无顺序 】
-     * @param state
-     *            状态
+     * @param page 翻页对象，可以作为 xml 参数直接使用，传递参数 Page 即自动分页,必须放在第一位
+     * @param state 状态
      * @return
      */</span>
-    IPage<span class="token generics function"><span class="token punctuation">&lt;</span>User<span class="token punctuation">&gt;</span></span> <span class="token function">selectPageVo</span><span class="token punctuation">(</span>Page page<span class="token punctuation">,</span> Integer state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    IPage<span class="token generics function"><span class="token punctuation">&lt;</span>User<span class="token punctuation">&gt;</span></span> <span class="token function">selectPageVo</span><span class="token punctuation">(</span>Page page<span class="token punctuation">,</span> <span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;state&quot;</span><span class="token punctuation">)</span> Integer state<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre></div><ul><li>UserMapper.xml 等同于编写一个普通 list 查询，mybatis-plus 自动替你分页</li></ul> <div class="language-xml extra-class"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>select</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>selectPageVo<span class="token punctuation">&quot;</span></span> <span class="token attr-name">resultType</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>com.baomidou.cloud.entity.UserVo<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
     SELECT id,name FROM user WHERE state=#{state}
@@ -78,7 +77,7 @@
     <span class="token comment">// 注意！！ 分页 total 是经过插件自动 回写 到传入 page 对象</span>
     <span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">selectPageVo</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span> state<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-</code></pre></div></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/baomidou/mybatis-plus-doc/edit/master/guide/page.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2018-9-15 09:06:05</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre></div></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/baomidou/mybatis-plus-doc/edit/master/guide/page.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <div class="last-updated"><span class="prefix">上次更新: </span> <span class="time">2018-9-15 18:28:39</span></div></div> <div class="page-nav"><p class="inner"><span class="prev">
         ←
         <a href="/guide/wrapper.html" class="prev">
           条件构造器
@@ -87,6 +86,6 @@
         </a>
         →
       </span></p></div> </div> <!----></div></div>
-    <script src="/assets/js/18.7810a342.js" defer></script><script src="/assets/js/app.d742ad99.js" defer></script>
+    <script src="/assets/js/18.24eeaeb4.js" defer></script><script src="/assets/js/app.aa333948.js" defer></script>
   </body>
 </html>
